@@ -4,6 +4,14 @@ from django.shortcuts import render
 from radiation_model.radiation_calculator import wall_radiation
 
 
+def custom_handler404(request, exception):
+    return render(request, 'app/error404.html', {}, status=404)
+
+
+def custom_handler500(request):
+    return render(request, 'app/error500.html', {}, status=500)
+
+
 def main(request):
     rad_list = wall_radiation(28, 20, 13, 1, 5, 6, 1, 1)
     print(rad_list)

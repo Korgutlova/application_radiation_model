@@ -15,8 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('app/', include('app.urls', namespace="app")),
+    path(r'', RedirectView.as_view(url='/app/', permanent=True)),
 ]
+
+handler404 = 'app.views.custom_handler404'
+handler500 = 'app.views.custom_handler500'
